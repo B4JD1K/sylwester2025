@@ -65,12 +65,14 @@ export default function HomeClient({
     return (
         <div className="space-y-6">
             <div className="flex flex-col gap-2">
+
+                    <div className="mx-auto p-4 md:p-8 shadow-sm">
                 <h1 className="text-3xl font-bold tracking-tight">Kto co przynosi?</h1>
                 <p className="text-muted-foreground text-lg">
                     Zadeklaruj co bierzesz, żebyśmy nie mieli 50 butelek Coli i 0 chipsów!
                 </p>
             </div>
-
+            </div>
             <Masonry
                 breakpointCols={breakpointColumnsObj}
                 className="flex -ml-6 w-auto"

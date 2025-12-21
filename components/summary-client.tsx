@@ -18,7 +18,7 @@ export default function SummaryClient({ data }: { data: typeof contributions.$in
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
-      <div>
+                    <div className="mx-auto p-4 md:p-8 shadow-sm">
         <h1 className="text-3xl font-bold mb-2">Podsumowanie</h1>
         <p className="text-muted-foreground">Wszystko w jednym miejscu.</p>
       </div>

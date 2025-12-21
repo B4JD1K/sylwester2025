@@ -6,5 +6,9 @@ export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const data = await getContributions();
-  return <HomeClient initialData={data} />;
+  return (
+    // <div className="mx-auto bg-card/40 backdrop-blur-sm border rounded-xl p-4 md:p-8 shadow-sm">
+      <HomeClient initialData={data} />
+    // </div>
+  );
 }
