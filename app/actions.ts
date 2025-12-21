@@ -24,6 +24,23 @@ export async function deleteContribution(id: number) {
   await db.delete(contributions).where(eq(contributions.id, id));
   revalidatePath("/");
   revalidatePath("/summary");
+  revalidatePath("/summary");
+  return { success: true };
+}
+
+export async function updateContribution(id: number, userName: string, itemName: string, quantity: string, note?: string) {
+  if (!userName || !itemName || !quantity) return { success: false, error: "Missing fields" };
+
+  await db.update(contributions)
+    .set({
+      itemName,
+      quantity,
+      note: note || null,
+    })
+    .where(eq(contributions.id, id));
+
+  revalidatePath("/");
+  revalidatePath("/summary");
   return { success: true };
 }
 
