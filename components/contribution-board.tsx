@@ -143,8 +143,8 @@ export function ContributionBoard({
 
               return (
               <li key={item.id} className="group relative flex items-start justify-between text-sm gap-2 p-2 rounded-lg hover:bg-muted/50 transition-colors">
-                 <div className="flex-1 space-y-0.5">
-                    <span className="font-medium text-foreground block break-words">{item.itemName}</span>
+                 <div className="flex-1 space-y-0.5 min-w-0">
+                    <span className="font-medium text-foreground block break-words wordwrap">{item.itemName}</span>
                     <span className="text-muted-foreground text-xs block">{item.quantity}</span>
                     {item.note && (
                         <div className="flex items-center gap-1.5 text-xs text-amber-600/90 dark:text-amber-400 mt-1">
@@ -154,7 +154,7 @@ export function ContributionBoard({
                     )}
                  </div>
                  {isCurrentUser && (
-                   <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                   <div className="flex flex-col items-center gap-2 opacity-60 md:opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                        <button 
                          onClick={() => startEditing(item)}
                          className="text-muted-foreground hover:text-primary transition-colors p-1"
