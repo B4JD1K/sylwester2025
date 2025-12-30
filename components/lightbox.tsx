@@ -76,14 +76,24 @@ export function Lightbox({ images, currentIndex, onClose, onNavigate }: Lightbox
         </button>
 
         <div className="relative w-full h-full flex items-center justify-center">
-            <Image
-                src={currentImage.url}
-                alt={`Photo by ${currentImage.uploaderName}`}
-                fill
-                className="object-contain"
-                priority
-                unoptimized
-            />
+            {currentImage.mediaType === 'video' ? (
+                <video
+                    src={currentImage.url}
+                    controls
+                    autoPlay
+                    className="max-w-full max-h-full object-contain focus:outline-none"
+                    onClick={(e) => e.stopPropagation()}
+                />
+            ) : (
+                <Image
+                    src={currentImage.url}
+                    alt={`Photo by ${currentImage.uploaderName}`}
+                    fill
+                    className="object-contain"
+                    priority
+                    unoptimized
+                />
+            )}
         </div>
       </div>
 
@@ -102,13 +112,22 @@ export function Lightbox({ images, currentIndex, onClose, onNavigate }: Lightbox
                         currentIndex === idx ? "border-primary opacity-100 scale-105" : "border-transparent opacity-50 hover:opacity-80"
                     )}
                 >
-                    <Image
-                        src={img.url}
-                        alt="thumbnail"
-                        fill
-                        className="object-cover"
-                        unoptimized
-                    />
+                    {img.mediaType === 'video' && !img.thumbnailUrl ? (
+                         <video 
+                             src={img.url} 
+                             className="object-cover w-full h-full opacity-80" 
+                             muted 
+                             preload="metadata"
+                         />
+                    ) : (
+                        <Image
+                            src={img.mediaType === 'video' && img.thumbnailUrl ? img.thumbnailUrl : (img.mediaType === 'video' ? img.url.replace(/\.[^/.]+$/, ".jpg") : img.url)}
+                            alt="thumbnail"
+                            fill
+                            className="object-cover"
+                            unoptimized
+                        />
+                    )}
                 </button>
             ))}
         </div>

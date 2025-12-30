@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${inter.className} min-h-screen bg-background text-foreground antialiased relative`}
         suppressHydrationWarning
       >
-        <div className="fixed inset-0 z-[-1] opacity-20 dark:opacity-40 pointer-events-none bg-[url('/sparkles1.png')] bg-cover bg-center bg-no-repeat bg-fixed mix-blend-screen" />
+        <div className="fixed inset-0 z-[-1] opacity-40 dark:opacity-40 pointer-events-none bg-[url('/sparkles-light.jpg')] dark:bg-[url('/sparkles-dark.png')] bg-cover bg-center bg-no-repeat bg-fixed dark:mix-blend-screen" />
         <ThemeProvider
             attribute="class"
             defaultTheme="system"

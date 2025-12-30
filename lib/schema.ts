@@ -15,5 +15,7 @@ export const photos = pgTable("photos", {
   url: text("url").notNull(),
   key: text("key").notNull(), // uploadthing key
   uploaderName: text("uploader_name"),
+  mediaType: text("media_type").$type<'image' | 'video'>().default('image').notNull(),
+  thumbnailUrl: text("thumbnail_url"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

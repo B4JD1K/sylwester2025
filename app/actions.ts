@@ -49,13 +49,37 @@ export async function getContributions() {
   return data;
 }
 
-export async function addPhoto(url: string, key: string, uploaderName: string) {
+export async function addPhoto(url: string, key: string, uploaderName: string, mediaType: "image" | "video" = "image", thumbnailUrl?: string) {
   await db.insert(photos).values({
     url,
     key,
     uploaderName,
+    mediaType,
+    thumbnailUrl,
   });
   revalidatePath("/gallery");
+}
+
+export async function deletePhoto(id: number, userName: string) {
+  const photo = await db.query.photos.findFirst({
+    where: eq(photos.id, id),
+  });
+
+  if (!photo) return { success: false, error: "Photo not found" };
+
+  if (photo.uploaderName !== userName) {
+    return { success: false, error: "You can only delete your own photos" };
+  }
+
+  const timeDiff = Date.now() - photo.createdAt.getTime();
+  if (timeDiff > 15 * 60 * 1000) {
+    // 15 minutes
+    return { success: false, error: "Cannot delete photos older than 15 minutes" };
+  }
+
+  await db.delete(photos).where(eq(photos.id, id));
+  revalidatePath("/gallery");
+  return { success: true };
 }
 
 export async function getPhotos() {
