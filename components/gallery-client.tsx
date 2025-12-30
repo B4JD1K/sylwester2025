@@ -67,7 +67,7 @@ export default function GalleryClient({ initialPhotos }: { initialPhotos: typeof
           <div className="flex-shrink-0">
                   <CldUploadButton
                       uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
-                      options={{ sources: ['local', 'url'], resourceType: 'auto', cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
+                      options={{ sources: ['local', 'url'], resourceType: 'auto', cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "dc0abdx6j" }}
                       onSuccess={async (result: any) => {
                           if (result.info) {
                               const isVideo = result.info.resource_type === 'video';
