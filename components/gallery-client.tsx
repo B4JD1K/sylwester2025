@@ -16,6 +16,15 @@ export default function GalleryClient({ initialPhotos }: { initialPhotos: typeof
   const { name } = useUser();
   const [photosList, setPhotosList] = useState(initialPhotos);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [reloadTimer, setReloadTimer] = useState<NodeJS.Timeout | null>(null);
+
+  const handleDelayedReload = () => {
+      if (reloadTimer) clearTimeout(reloadTimer);
+      const timer = setTimeout(() => {
+          window.location.reload();
+      }, 2000);
+      setReloadTimer(timer);
+  };
 
   const breakpointColumnsObj = {
     default: 4,
@@ -44,7 +53,7 @@ export default function GalleryClient({ initialPhotos }: { initialPhotos: typeof
                           await addPhoto(file.url, file.key, name || "Anonim", !!isVideo ? "video" : "image");
                       }
                       toast.success("Media dodane!");
-                      window.location.reload(); 
+                      handleDelayedReload();
                     }
                   }}
                   onUploadError={(error: Error) => {
@@ -78,8 +87,13 @@ export default function GalleryClient({ initialPhotos }: { initialPhotos: typeof
                                   isVideo ? "video" : "image", 
                                   result.info.thumbnail_url
                               );
-                              toast.success("Media dodane!");
-                              window.location.reload();
+                              toast.success("Media dodane!", {
+                                action: {
+                                  label: "Odśwież",
+                                  onClick: () => window.location.reload()
+                                },
+                                duration: 3000,
+                              });
                           }
                       }}
                       className="h-10 px-4 py-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md text-sm font-medium whitespace-nowrap transition-colors flex items-center justify-center gap-2"
