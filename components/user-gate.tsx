@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useUser } from "@/lib/user-context";
-import { cn } from "@/lib/utils";
+import {useEffect, useState} from "react";
+import {useUser} from "@/lib/user-context";
 
-export function UserGate({ children }: { children: React.ReactNode }) {
-  const { name, setName } = useUser();
+export function UserGate({children}: { children: React.ReactNode }) {
+  const {name, setName} = useUser();
   const [inputName, setInputName] = useState("");
   const [mounted, setMounted] = useState(false);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 
 type UserContextType = {
   name: string | null;
@@ -12,7 +12,7 @@ const UserContext = createContext<UserContextType>({
   setName: () => {},
 });
 
-export function UserProvider({ children }: { children: React.ReactNode }) {
+export function UserProvider({children}: { children: React.ReactNode }) {
   const [name, setNameState] = useState<string | null>(null);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <UserContext.Provider value={{ name, setName }}>
+    <UserContext.Provider value={{name, setName}}>
       {children}
     </UserContext.Provider>
   );
